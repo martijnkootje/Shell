@@ -1,0 +1,38 @@
+#!/bin/bash
+running=true
+
+while [ running ]
+do
+	echo "Command: "
+	read
+	if [ $REPLY == "create" ]; then
+		echo "Geef een path om een bestandlijst van te maken: "
+		read
+		path=$REPLY
+		
+		for file in $path/*
+		do
+		echo -n "file: " >> "files.txt" | echo $file >> "files.txt"
+		echo -n "File_size: " >> "files.txt" | stat -c%s $file >>"files.txt"
+		echo -n "blocks: " >> "files.txt" | stat -c%b $file >>"files.txt"
+		echo "" >> "files.txt"
+		done
+		echo "File list created, you can view it by using read"
+	fi
+
+	filename='files.txt'
+	if [ $REPLY == "read" ] && [ -f $filename ]; then
+			n=1
+			while read line; 
+			do
+			echo "$line"
+			n=$((n+1))
+			done < $filename
+	elif [ $REPLY == "read" ]; then
+		echo "No file list affailable, create one with: create"
+	fi
+
+	if [ $REPLY == "close" ]; then
+		break
+	fi
+done

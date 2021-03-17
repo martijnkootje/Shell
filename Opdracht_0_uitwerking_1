@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cd $1
+mkdir Afbeeldingen
+for file in $1/*
+do
+        if [[ $file ==  *.png ]] || [[ $file ==  *.jpg ]]
+        then
+                mv $file $1/Afbeeldingen
+        fi
+done;
