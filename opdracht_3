@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f $3]; then
+if [ -f $3 ]; then
    rm $1/logs/$3
 fi
 
